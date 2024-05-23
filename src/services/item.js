@@ -1,16 +1,12 @@
-/* CASOS DE USO DOS ITENS
-    => Criar itens como subtotal
- */
+//CASOS DE USO DOS ITENS
 
-// => Criar itens como subtotal
-async function createItem(name, price, quatity) {
+// -> criar item com subtotal certo
+async function createItem(name, price, quantity) {
   return {
     name,
     price,
-    quatity,
-
-    // Função que ja calcula o subtotal
-    subtotal: () => price * quatity,
+    quantity,
+    subtotal: () => price * quantity,
   };
 }
 

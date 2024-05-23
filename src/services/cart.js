@@ -1,37 +1,20 @@
-/*  CASOS DE USO
-    
-    ✅ Adicionar item
-    ✅ Calcular valor total
-    ✅ Deletar item
-    ✅ Remover item 
+//quais açoes meu carrinho pode fazer
 
-*/
-// Mostrar itens do carrinho
-async function displayCart(userCart) {
-  console.log("\n 📝Shopee cart list");
-  userCart.forEach((item, index) => {
-    console.log(
-      `${index++}. ${item.name} - R$ ${item.price} | ${
-        item.quatity
-      }x | Subtotal = ${item.subtotal()}`
-    );
-  });
-}
-
-// Adicionar item
+//CASOS DE USO
+// ✅ -> adicionar item no carrinho
 async function addItem(userCart, item) {
   userCart.push(item);
 }
 
-// Calcular valor total
+// ✅ -> calcular o total do carrinho
 async function calculateTotal(userCart) {
-  console.log("\n 🛒💵 Shopee Cart Total is");
+  console.log("\nShopee Cart TOTAL IS:");
 
   const result = userCart.reduce((total, item) => total + item.subtotal(), 0);
-  console.log(`\n 💵 Total: ${result.toFixed(2)}`);
+  console.log(`🎁Total: ${result}`);
 }
 
-// Deletar o item selecionado do Carrinho
+// -> deletar item do carrinho
 async function deleteItem(userCart, name) {
   const index = userCart.findIndex((item) => item.name === name);
 
@@ -40,29 +23,40 @@ async function deleteItem(userCart, name) {
   }
 }
 
-// // Remover item by Index
+// -> ✅ remover um item - diminui um item
 async function removeItem(userCart, item) {
-  // 1. Encontrar o indice do item
-  const indexFound = userCart.findIndex(
-    (product) => product.name === item.name
-  );
+  //1. encontrar o indice do item
+  const indexFound = userCart.findIndex((p) => p.name === item.name);
 
-  // 2. Caso não encontre o item no index
+  //2. Caso não encontre o item
   if (indexFound == -1) {
-    console.log("Item não encontrado.");
+    console.log("item não encontrado");
     return;
   }
 
-  // 3. Item > 1 subtrair um item.
-  if (userCart[indexFound].quatity > 1) {
-    userCart[indexFound].quatity -= 1;
+  //3. item > 1 subtrair um item
+  if (userCart[indexFound].quantity > 1) {
+    userCart[indexFound].quantity -= 1;
     return;
   }
-  // 4. Caso item = 1 deletar item.
-  if (userCart[indexFound].quatity === 1) {
+
+  //4. caso item = 1 deletar o item
+  if (userCart[indexFound].quantity == 1) {
     userCart.splice(indexFound, 1);
     return;
   }
 }
 
-export { addItem, calculateTotal, deleteItem, removeItem, displayCart };
+// ✅ mostra todos os items do carrinho
+async function displaycart(userCart) {
+  console.log("\nShopee cart list:");
+  userCart.forEach((item, index) => {
+    console.log(
+      `${index + 1}. ${item.name} - R$ ${item.price} | ${
+        item.quantity
+      }x | Subtotal = ${item.subtotal()}`
+    );
+  });
+}
+
+export { addItem, calculateTotal, deleteItem, removeItem, displaycart };
